@@ -1,4 +1,6 @@
 //esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
 
 import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
@@ -20,7 +22,6 @@ const Home = () => {
       </Hero>
       <Services />
       <FeaturedRooms/>
-      <Button >Hello</Button>
     </Fragment>
   )
 }

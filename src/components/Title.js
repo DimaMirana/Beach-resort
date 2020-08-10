@@ -1,4 +1,8 @@
-import React from 'react'
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
+import React from 'react';
 
 const Title = ({title}) => {
     return (

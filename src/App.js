@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import './App.css';

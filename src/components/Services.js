@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React from 'react';
 import {FaCocktail, FaHiking, FaShuttleVan, FaBeer} from 'react-icons/fa';
 

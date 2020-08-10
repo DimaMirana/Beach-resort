@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React, {createContext, useState, useEffect} from 'react';
 import items from './data';
 
@@ -52,5 +56,13 @@ const RoomProvider = (props) => {
 }
 
 const RoomConsumer = RoomContext.Consumer;
+
+export function withRoomConsumer(Component) {
+    return function ConsumerWrapper(props){
+        return <RoomConsumer>
+            {value =><Component {...props} context = {value} />}
+        </RoomConsumer>
+    }
+}
 
 export {RoomProvider, RoomConsumer, RoomContext};

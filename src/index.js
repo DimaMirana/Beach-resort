@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';

@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';

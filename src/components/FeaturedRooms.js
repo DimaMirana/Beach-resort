@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React, {useContext} from 'react';
 
 import Loading from './Loading';

@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 import React from 'react';
 
 import loadingGif from '../images/gif/loading-arrow.gif';

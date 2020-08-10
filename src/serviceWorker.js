@@ -1,3 +1,7 @@
+//esversion: 6
+/* jshint ignore:end */
+/* jshint ignore:start */
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
