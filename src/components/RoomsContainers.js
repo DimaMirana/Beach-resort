@@ -8,11 +8,16 @@ import RoomsFilter from './RoomsFilter';
 import RoomsList from './RoomsList';
 import Loading from './Loading';
 
-import {withRoomConsumer} from '../ResortContext';
+import {RoomConsumer, withRoomConsumer} from '../ResortContext';
 
 function RoomsContainer({context}) {
-    const {loading,sortedRooms,rooms} = context;
-
+    const {sortedRooms,setSortedRooms} = context;
+    //console.log(sortedRooms);
+    const {loading, rooms} = context.state;
+    //console.log(rooms);
+    if (sortedRooms.length === 0) {
+        setSortedRooms(rooms);
+    }
     if(loading) {
         return <Loading/>
     }
