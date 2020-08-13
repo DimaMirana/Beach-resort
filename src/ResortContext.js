@@ -8,46 +8,45 @@ import items from './data';
 const RoomContext = createContext();
 
 const RoomProvider = (props) => {
-    const [state, setState] = useState({
+    const [stateObject, setStateObject] = useState({
         rooms:[],
         featuredRooms:[],
         loading:true,
         type: "all",
-        capacity: 1,
-        price: 0,
         minPrice: 0,
         maxPrice: 0,
-        minSize: 0,
-        maxSize: 0,
-        breakfast: false,
-        pets: false
     });
-    const[sortedRooms, setSortedRooms] = useState([]);
+    const [sortedRooms, setSortedRooms] = useState([]);
     const [type, setType] = useState('all');
+    const [price, setPrice] = useState(0);
     const [capacity, setCapacity] = useState(1);
     const [breakfast, setBreakfast] = useState(false);
     const [pets, setPets] = useState(false);
     const [count,setCount] = useState(false);
     useEffect(()=>{
         let rooms = formatData(items);
-        let room = [...rooms];
         let featuredRooms = rooms.filter(room => room.featured === true);
         let maxPrice = Math.max(...rooms.map(item => item.price));
         let maxSize = Math.max(...rooms.map(item => item.size));
-        setState({
+        setStateObject({
             rooms,
             featuredRooms,
             loading:false,
             maxPrice,
-            maxSize
+            maxSize,
+            minSize:0
         });
-        setSortedRooms(state.rooms);
+        
+        //setSortedRooms(sortedRooms=>[...sortedRooms,rooms]);
+        setPrice(maxPrice);
+        //console.log(price);
+        
     },[]);
+    
     
     useEffect(()=>{
         filterRooms();
         setCount(false);
-        //console.log(count);
     },[count])
     
     const formatData = (items) => {
@@ -62,7 +61,7 @@ const RoomProvider = (props) => {
     }
     
     const getRoom = (slug) => {
-        let tempRooms = [...state.rooms];
+        let tempRooms = [...stateObject.rooms];
         const room = tempRooms.find((room) => room.slug === slug);
         return room;
     }
@@ -71,29 +70,61 @@ const RoomProvider = (props) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+        console.log(value);
+        console.log(name);
         if(name === 'type'){
             setType(value);
             setCount(true);
         }
         if(name === 'capacity') {
-            setCapacity(value);
+            setCapacity(parseInt(value));
+            setCount(true);
+        }
+        if(name === 'price'){
+            setPrice(parseInt(value));
+            setCount(true);
+        }
+        if(name === 'breakfast'){
+            setBreakfast(value);
+            setCount(true);
+        }
+        if (name === 'pets') {
+            setPets(value);
             setCount(true);
         }
     }
     
     const filterRooms = () => {
-        const {rooms, minSize,maxSize} = state;
+        const {rooms} = stateObject;
         
         let tempRooms = [...rooms];
-        //console.log(tempRooms);
-        if(type !== 'all'){
+        //filter by type
+        if(type!== 'all'){
             tempRooms = tempRooms.filter(room => room.type === type);
+        }
+        
+        //filter by capacity
+        if(capacity !== 1) {
+            tempRooms = tempRooms.filter(room => room.capacity >= capacity);
+        }
+        
+        // filter by price
+        tempRooms = tempRooms.filter(room => room.price <= price);
+        
+        //filter by breakfast
+        if (breakfast) {
+            tempRooms = tempRooms.filter(room => room.breakfast === true);
+        }
+        
+        //filter by pets
+        if (pets) {
+            tempRooms = tempRooms.filter(room => room.pets === true);
         }
         setSortedRooms(tempRooms);
     }
     
     return (
-        <RoomContext.Provider value = {{state,getRoom,handleChange,filterRooms,sortedRooms,type,capacity,breakfast,pets,setSortedRooms}}>
+        <RoomContext.Provider value = {{stateObject,getRoom,handleChange,filterRooms,sortedRooms,type,capacity,price,breakfast,pets,setSortedRooms}}>
             {props.children}
         </RoomContext.Provider>
     )

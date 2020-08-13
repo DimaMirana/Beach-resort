@@ -10,9 +10,9 @@ import Title from './Title';
 import {RoomContext} from '../ResortContext'; 
 
 function FeaturedRooms() {
-    const {state} = useContext(RoomContext);
-    let rooms = state.featuredRooms;
-    const loading = state.loading;
+    const {stateObject} = useContext(RoomContext);
+    let rooms = stateObject.featuredRooms;
+    const loading = stateObject.loading;
     rooms = rooms.map(room => {
         return <Room key = {room.id} room = {room} />
     })

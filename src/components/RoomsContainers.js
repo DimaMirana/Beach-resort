@@ -12,12 +12,7 @@ import {RoomConsumer, withRoomConsumer} from '../ResortContext';
 
 function RoomsContainer({context}) {
     const {sortedRooms,setSortedRooms} = context;
-    //console.log(sortedRooms);
-    const {loading, rooms} = context.state;
-    //console.log(rooms);
-    if (sortedRooms.length === 0) {
-        setSortedRooms(rooms);
-    }
+    const {loading, rooms} = context.stateObject;
     if(loading) {
         return <Loading/>
     }
