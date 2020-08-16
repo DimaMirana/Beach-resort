@@ -36,17 +36,17 @@ const RoomProvider = (props) => {
             maxSize,
             minSize:0
         });
-        
-        //setSortedRooms(sortedRooms=>[...sortedRooms,rooms]);
+        setSortedRooms(rooms);
         setPrice(maxPrice);
-        //console.log(price);
         
     },[]);
     
     
     useEffect(()=>{
-        filterRooms();
-        setCount(false);
+        if(count === true){
+            filterRooms();
+            setCount(false);
+        }
     },[count])
     
     const formatData = (items) => {
@@ -70,8 +70,6 @@ const RoomProvider = (props) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(value);
-        console.log(name);
         if(name === 'type'){
             setType(value);
             setCount(true);
